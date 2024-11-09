@@ -1,24 +1,29 @@
+import DatePicker from "./funcs/DatePicker"
+
 describe('Automation test', () => {
   it('Set the date using the calendar widget to- 28th of February, 2013 and time to 12:00', () => {
-    cy.visit("https://demoqa.com/date-picker")
+    DatePicker.visit()
 
-    // === SETTING THE YEAR ===
-    cy.get('#dateAndTimePickerInput').click()
-    cy.get('.react-datepicker__year-read-view--down-arrow').click()
-    cy.get(':nth-child(13) > .react-datepicker__navigation').click().click().click().click().click().click().click().click()
-    cy.get('.react-datepicker__year-dropdown > :nth-child(10)').click()
+    // Set the date to 28th of February, 2013 12:00
+    DatePicker.selectYear(2013)
+        .selectMonth('February')
+        .selectDay(28)
+        .selectTime('12:00')
 
-     // === SETTING THE MONTH ===
-    cy.get('#dateAndTimePickerInput').click()
-    cy.get('.react-datepicker__month-read-view--selected-month').click()
-    cy.get('.react-datepicker__month-dropdown > :nth-child(2)').click()
-
-    // === SETTING THE DAY ===
-    cy.get(':nth-child(5) > .react-datepicker__day--028').click()
-    // === SETTING THE TIME ===
-    cy.get(':nth-child(49)').click()
-
-    // === COMPARING VALUE ===
-    cy.get('#dateAndTimePickerInput').should('have.value', 'February 28, 2013 12:00 PM')
+    // Checking if the magic code above did its job.
+    DatePicker
+        .getDateInputValue()
+        .should('have.value', 'February 28, 2013 12:00 PM')
+        // Because it looks cool.
   })
 })
+
+/**
+   * こんにちは、ENKOです。
+   * Music Producer・Composer・Songwriter, Multi-instrumentalist, Software Engineer, Security Tester
+   * 
+   * https://blog.narukoshin.me - blog. :)
+   * https://x.com/enkosan_p - Twitter. :)
+   * 
+   * 2024
+   */
